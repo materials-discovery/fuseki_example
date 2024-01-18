@@ -1,0 +1,32 @@
+version: "3" 
+
+services:
+  
+  fuseki:
+    build:
+      context: fuseki
+      dockerfile: fuseki/Dockerfile
+    image: fuseki
+    container_name: fuseki
+    user: "root"
+    environment:
+      - JVM_ARGS=-Xmx6g
+    expose:
+      - 3030
+    volumes:
+      - fuseki_logs:/fuseki/logs
+      - fuseki_databases:/fuseki/databases
+  
+    networks:
+      - omi-network
+    ports:
+       - "3030:3030"
+
+volumes:
+  fuseki_logs:
+  fuseki_databases:
+
+networks:
+  omi-network:
+   name: omi-network
+
